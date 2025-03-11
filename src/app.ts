@@ -2,6 +2,7 @@
 import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import { globalErrorHandler } from './app/middlwares/globalErrorHandler';
+import router from './app/routes';
 
 
 const app: Application = express()
@@ -10,7 +11,7 @@ const app: Application = express()
 app.use(express.json());
 app.use(cors());
 
-app.use();
+app.use('/', router);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
