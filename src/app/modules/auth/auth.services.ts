@@ -1,8 +1,9 @@
 import AppError from "../../error/AppError";
 import { User } from "../users/user.model"
-import { TUserLogin } from "./auth.interface"
+import { TUserJWTPayload, TUserLogin } from "./auth.interface"
 import httpStatus from 'http-status-codes';
-import { convertHashPassToPlaiText } from "./auth.utils";
+import { convertHashPassToPlaiText, generateAccessSecretToken } from "./auth.utils";
+import config from "../../config";
 
 const signInUser = async(payload: TUserLogin) => {
 
@@ -14,7 +15,7 @@ const signInUser = async(payload: TUserLogin) => {
 
     // Check the user is delete or not
     const isUserDelete = isUserExists?.isDeleted;
-    if(isUserDelete === false) {
+    if(isUserDelete === true) {
         throw new AppError(httpStatus.FORBIDDEN, 'User is already deleted!');
     };
 
@@ -30,6 +31,19 @@ const signInUser = async(payload: TUserLogin) => {
         throw new AppError(httpStatus.BAD_REQUEST, 'Incorrect Password!');
     }
 
+    // If the password is correct then create user token
+    const jwtPayload: TUserJWTPayload = {
+        userEmail: isUserExists?.email,
+        userId: isUserExists?.id,
+        userRole: isUserExists?.role
+    };
+
+    // Create accsess token
+    const accessToken = generateAccessSecretToken(jwtPayload, config.jwt_access_secret_token as string, config.jwt_access_expire_in as string);
+    
+    return {
+        accessToken
+    }
 }
 
 
