@@ -7,6 +7,7 @@ export const globalErrorHandler = (err: any, req: Request, res: Response, next: 
 
     return res.status(statusCode).json({
         success: false,
-        message
+        message,
+        err: err
     })
 }
