@@ -14,7 +14,7 @@ const signInUser = async(payload: TUserLogin) => {
 
     // Check the user is delete or not
     const isUserDelete = isUserExists?.isDeleted;
-    if(isUserDelete === true) {
+    if(isUserDelete === false) {
         throw new AppError(httpStatus.FORBIDDEN, 'User is already deleted!');
     };
 
