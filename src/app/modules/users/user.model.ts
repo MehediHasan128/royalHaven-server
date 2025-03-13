@@ -1,20 +1,8 @@
 import { model, Schema } from 'mongoose';
-import { TUser, TUserName } from './user.interface';
+import { TUser } from './user.interface';
 import bcrypt from 'bcrypt';
 import config from '../../config';
-
-export const UserNameSchema = new Schema<TUserName>({
-  firstName: {
-    type: String,
-    required: [true, 'First name is required'],
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    required: [true, 'Last name is required'],
-    trim: true,
-  },
-});
+import { UserNameSchema } from '../../global/model';
 
 const UserSchema = new Schema<TUser>({
   id: {
@@ -46,10 +34,6 @@ const UserSchema = new Schema<TUser>({
     type: String,
     required: [true, 'Phone number is required'],
     match: [/^\+?[1-9]\d{1,14}$/, 'Invalid phone number format'],
-  },
-  gender: {
-    type: String,
-    enum: ['male', 'female'],
   },
   role: {
     type: String,

@@ -1,7 +1,4 @@
-export type TUserName = {
-  firstName: string;
-  lastName: string;
-};
+import { TUserName } from "../../global/interface";
 
 export type TUser = {
   id: string;
@@ -10,7 +7,6 @@ export type TUser = {
   password: string;
   profileImage: string;
   phoneNumber: string;
-  gender?: 'male' | 'female';
   role: 'buyer' | 'seller' | 'agent' | 'admin';
   status: 'active' | 'pending' | 'suspended' | 'banned';
   passwordChangeAt?: Date;
