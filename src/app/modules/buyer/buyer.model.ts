@@ -15,7 +15,6 @@ const UserSchema = new Schema<TBuyer>(
     },
     profileImage: {
       type: String,
-      default: '',
     },
     userName: {
       type: UserNameSchema,
@@ -31,14 +30,14 @@ const UserSchema = new Schema<TBuyer>(
     },
     gender: {
       type: String,
-      enum: ['male', 'female', ''],
-      default: '',
+      enum: ['male', 'female'],
     },
     dateOfBirth: {
       type: Date,
     },
     contactNumber: {
       type: String,
+      match: [/^\+?[1-9]\d{1,14}$/, 'Invalid phone number format'],
     },
     address: AddressSchema,
   },

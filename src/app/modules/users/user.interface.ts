@@ -5,8 +5,7 @@ export type TUser = {
   userName: TUserName;
   email: string;
   password: string;
-  profileImage: string;
-  phoneNumber: string;
+  profileImage?: string;
   role: 'buyer' | 'seller' | 'agent' | 'admin';
   status: 'active' | 'pending' | 'suspended' | 'banned';
   passwordChangeAt?: Date;

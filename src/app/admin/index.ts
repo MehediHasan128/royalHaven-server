@@ -7,7 +7,7 @@ const admin = {
   email: 'mehedihasanbaized@gmail.com',
   password: config.admin_password,
   role: 'admin',
-  profileImage: '',
+  profileImage: 'https://tinyurl.com/3jk7xwtw',
   phoneNumber: '+8801302557956',
   gender: 'male',
   status: 'active'

@@ -28,17 +28,11 @@ const UserSchema = new Schema<TUser>({
   },
   profileImage: {
     type: String,
-    default: '',
-  },
-  phoneNumber: {
-    type: String,
-    required: [true, 'Phone number is required'],
-    match: [/^\+?[1-9]\d{1,14}$/, 'Invalid phone number format'],
   },
   role: {
     type: String,
     enum: ['buyer', 'seller', 'agent', 'admin'],
-    required: [true, 'User role is required'],
+    default: 'buyer'
   },
   status: {
     type: String,
