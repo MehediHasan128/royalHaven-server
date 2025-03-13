@@ -35,7 +35,9 @@ const signInUser = async(payload: TUserLogin) => {
     const jwtPayload: TUserJWTPayload = {
         userEmail: isUserExists?.email,
         userId: isUserExists?.id,
-        userRole: isUserExists?.role
+        userRole: isUserExists?.role,
+        userName: isUserExists?.userName,
+        userProfileImage: isUserExists?.profileImage
     };
 
     // Create accsess token

@@ -7,4 +7,6 @@ export type TUserJWTPayload = {
     userEmail: string;
     userId: string;
     userRole: string;
+    userName: object;
+    userProfileImage: string;
 }
