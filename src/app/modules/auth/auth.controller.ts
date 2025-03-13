@@ -5,6 +5,7 @@ import { AuthServices } from "./auth.services"
 const UserSignIn = catchAsync(async(req, res) => {
 
     const data = await AuthServices.signInUser(req.body);
+    console.log(req.body);
 
     // Send responce
     sendRes(res, {

@@ -49,6 +49,6 @@ export const globalErrorHandler = (
     success: false,
     message,
     errorSource,
-    // err: err,
+    err: err,
   });
 };
