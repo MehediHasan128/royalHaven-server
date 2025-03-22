@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
-import { TIdentityNumber, TSeller } from './seller.interface';
 import { AddressSchema, UserNameSchema } from '../../global/model';
+import { TIdentityNumber, TSeller } from '../seller/seller.interface';
 
 const IdentityNumberSchema = new Schema<TIdentityNumber>({
   passportNumber: { type: String },
@@ -8,7 +8,7 @@ const IdentityNumberSchema = new Schema<TIdentityNumber>({
   nationalIdCard: { type: String },
 });
 
-const SellerSchema = new Schema<TSeller>({
+const SellerRequestSchema = new Schema<TSeller>({
   id: { type: String, required: [true, 'Seller ID is required'] },
   userId: {
     type: Schema.Types.ObjectId,
@@ -51,4 +51,4 @@ const SellerSchema = new Schema<TSeller>({
 
 
 
-export const Seller = model<TSeller>('seller', SellerSchema);
+export const SellerRequest = model<TSeller>('sellerRequest', SellerRequestSchema);

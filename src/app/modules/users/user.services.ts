@@ -5,6 +5,7 @@ import { TUser } from './user.interface';
 import { User } from './user.model';
 import AppError from '../../error/AppError';
 import httpStatus from 'http-status-codes';
+import { TSeller } from '../seller/seller.interface';
 
 const createUserIntoDB = async (password: string, payload: TBuyer) => {
   // First create a user into db
@@ -37,6 +38,7 @@ const createUserIntoDB = async (password: string, payload: TBuyer) => {
 
     // Crete buyer into db (transaction-2)
     const newBuyer = await Buyer.create(payload);
+    await newBuyer.save();
     if (!newBuyer) {
       throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create buyer');
     }
@@ -51,6 +53,11 @@ const createUserIntoDB = async (password: string, payload: TBuyer) => {
   }
 };
 
+const createSellerIntoDB = async(payload: TSeller) => {
+  console.log(payload);
+}
+
 export const UserServices = {
   createUserIntoDB,
+  createSellerIntoDB
 };

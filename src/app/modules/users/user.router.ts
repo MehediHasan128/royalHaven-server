@@ -5,5 +5,7 @@ const router = express.Router();
 
 // Create buyer
 router.post('/create-user', UserController.createUser);
+// Create seller
+router.post('/create-seller', UserController.createSeller);
 
 export const UserRoutes = router;

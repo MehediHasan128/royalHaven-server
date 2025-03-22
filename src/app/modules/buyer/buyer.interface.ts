@@ -6,9 +6,9 @@ export type TBuyer = {
     userId: Types.ObjectId;
     userName: TUserName;
     email: string;
-    profileImage?: string;
+    profileImage: string;
     gender?: 'male' | 'female';
     dateOfBirth?: Date;
-    contactNumber?: string;
-    address?: TAddress;
+    contactNumber: string;
+    address: TAddress;
 }

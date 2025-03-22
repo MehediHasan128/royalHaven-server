@@ -17,17 +17,22 @@ export const UserNameSchema = new Schema<TUserName>({
 export const AddressSchema = new Schema<TAddress>({
   streetAddress: {
     type: String,
+    default: null
   },
   city: {
     type: String,
+    default: null
   },
   state: {
     type: String,
+    default: null
   },
   postalCode: {
     type: String,
+    default: null
   },
   country: {
     type: String,
+    default: null
   },
 });

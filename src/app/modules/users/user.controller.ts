@@ -16,9 +16,28 @@ const createUser = catchAsync(async(req, res) => {
         data: data
     })
 
+});
+
+
+
+
+const createSeller = catchAsync(async(req, res) => {
+    
+
+    const data = await UserServices.createSellerIntoDB(req.body);
+
+    // Send responce
+    sendRes(res, {
+        success: true,
+        statusCode: 200,
+        message: 'Successfully user is created as a buyer!',
+        data: data
+    })
+
 })
 
 
 export const UserController = {
-    createUser
+    createUser,
+    createSeller
 }
