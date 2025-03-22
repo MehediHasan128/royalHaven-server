@@ -1,8 +1,8 @@
 import { TSeller } from "../seller/seller.interface"
-import { Seller } from "../seller/seller.model"
+import { SellerRequest } from "./sellerRequest.model";
 
 const createSellerReqIntoDB = async(payload: TSeller) => {
-    const data = await Seller.create(payload);
+    const data = await SellerRequest.create(payload);
     return data;
 }
 

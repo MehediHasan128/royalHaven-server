@@ -32,10 +32,10 @@ const UserSchema = new Schema<TBuyer>(
     gender: {
       type: String,
       enum: ['male', 'female'],
-      default: null,
     },
     dateOfBirth: {
       type: Date,
+      default: null
     },
     contactNumber: {
       type: String,

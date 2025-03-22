@@ -4,6 +4,7 @@ import { SellerReqServices } from "./sellerRequest.services";
 
 const createSeller = catchAsync(async(req, res) => {
     
+    console.log(7);
 
     const data = await SellerReqServices.createSellerReqIntoDB(req.body);
 
