@@ -37,7 +37,24 @@ const createSeller = catchAsync(async(req, res) => {
 })
 
 
+
+const uploadUserImage = catchAsync(async(req, res) => {
+
+    const data = await UserServices.uploadUserImageIntoDB(req.file, req.params.userId);
+
+    // Send responce
+    sendRes(res, {
+        success: true,
+        statusCode: 200,
+        message: 'Image upload successfully!',
+        data: data
+    });
+
+})
+
+
 export const UserController = {
     createUser,
-    createSeller
+    createSeller,
+    uploadUserImage
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { startSession } from 'mongoose';
 import { TBuyer } from '../buyer/buyer.interface';
 import { Buyer } from '../buyer/buyer.model';
@@ -6,6 +7,7 @@ import { User } from './user.model';
 import AppError from '../../error/AppError';
 import httpStatus from 'http-status-codes';
 import { TSeller } from '../seller/seller.interface';
+import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 
 const createUserIntoDB = async (password: string, payload: TBuyer) => {
   // First create a user into db
@@ -57,7 +59,23 @@ const createSellerIntoDB = async(payload: TSeller) => {
   console.log(payload);
 }
 
+
+const uploadUserImageIntoDB = async(file: any, userId: string) => {
+  const user = await User.findOne({id: userId}, {userName: 1, _id: 0});
+  
+  const imageName = `${userId}-${user?.userName?.lastName}`;
+  const imagePath = file?.path;
+
+  const uploadImage = await sendImageToCloudinary(imagePath, imageName);
+  const userImageURL = uploadImage?.secure_url;
+  
+  // update image url in user or buyer collection
+  await User.findOneAndUpdate({id: userId}, {profileImage: userImageURL}, {new: true});
+  await Buyer.findOneAndUpdate({id: userId}, {profileImage: userImageURL}, {new: true}); 
+}
+
 export const UserServices = {
   createUserIntoDB,
-  createSellerIntoDB
+  createSellerIntoDB,
+  uploadUserImageIntoDB
 };

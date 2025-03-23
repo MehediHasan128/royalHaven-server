@@ -1,5 +1,6 @@
 import express from 'express';
 import { UserController } from './user.controller';
+import { upload } from '../../utils/sendImageToCloudinary';
 
 const router = express.Router();
 
@@ -7,5 +8,7 @@ const router = express.Router();
 router.post('/create-user', UserController.createUser);
 // Create seller
 router.post('/create-seller', UserController.createSeller);
+// Upload image
+router.post('/uploadImage/:userId', upload.single('file'), UserController.uploadUserImage);
 
 export const UserRoutes = router;
