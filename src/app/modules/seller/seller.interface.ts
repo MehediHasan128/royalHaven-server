@@ -15,7 +15,7 @@ export type TSeller = {
     email: string;
     profileImage: string;
     gender: 'male' | 'female';
-    dateOfBirth: Date;
+    dateOfBirth: string;
     contactNumber: string;
     address: TAddress;
     companyName?: string;

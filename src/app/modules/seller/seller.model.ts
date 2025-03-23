@@ -34,7 +34,7 @@ const SellerSchema = new Schema<TSeller>({
     },
     required: [true, 'Gender is required'],
   },
-  dateOfBirth: { type: Date, required: [true, 'Date of birth is required'] },
+  dateOfBirth: { type: String, required: [true, 'Date of birth is required'] },
   contactNumber: {
     type: String,
     required: [true, 'Contact number is required'],

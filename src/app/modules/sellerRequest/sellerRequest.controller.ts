@@ -3,8 +3,6 @@ import { sendRes } from "../../utils/sendResponce";
 import { SellerReqServices } from "./sellerRequest.services";
 
 const createSeller = catchAsync(async(req, res) => {
-    
-    console.log(7);
 
     const data = await SellerReqServices.createSellerReqIntoDB(req.body);
 
@@ -19,6 +17,22 @@ const createSeller = catchAsync(async(req, res) => {
 });
 
 
+const getAllSellerReq = catchAsync(async(req, res) => {
+
+    const data = await SellerReqServices.getAllSellerRequestFromDB();
+
+    // Send responce
+    sendRes(res, {
+        success: true,
+        statusCode: 200,
+        message: 'Retrive all seller request!',
+        data: data
+    })
+
+});
+
+
 export const SellerReqController = {
-    createSeller
+    createSeller,
+    getAllSellerReq
 }

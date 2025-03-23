@@ -1,20 +1,15 @@
 import { model, Schema } from 'mongoose';
 import { AddressSchema, UserNameSchema } from '../../global/model';
-import { TIdentityNumber, TSeller } from '../seller/seller.interface';
+import { TSeller } from '../seller/seller.interface';
 
-const IdentityNumberSchema = new Schema<TIdentityNumber>({
-  passportNumber: { type: String },
-  drivingLicence: { type: String },
-  nationalIdCard: { type: String },
-});
+// const IdentityNumberSchema = new Schema<TIdentityNumber>({
+//   passportNumber: { type: String },
+//   drivingLicence: { type: String },
+//   nationalIdCard: { type: String },
+// });
 
 const SellerRequestSchema = new Schema<TSeller>({
   id: { type: String, required: [true, 'Seller ID is required'] },
-  userId: {
-    type: Schema.Types.ObjectId,
-    required: [true, 'User ID is required'],
-    ref: 'User',
-  },
   userName: {
     type: UserNameSchema,
     required: true,
@@ -34,7 +29,7 @@ const SellerRequestSchema = new Schema<TSeller>({
     },
     required: [true, 'Gender is required'],
   },
-  dateOfBirth: { type: Date, required: [true, 'Date of birth is required'] },
+  dateOfBirth: { type: String, required: [true, 'Date of birth is required'] },
   contactNumber: {
     type: String,
     required: [true, 'Contact number is required'],
@@ -44,7 +39,7 @@ const SellerRequestSchema = new Schema<TSeller>({
   websiteLink: { type: String },
   licenceNumber: { type: String },
   identityNumber: {
-    type: IdentityNumberSchema,
+    type: String,
     required: [true, 'Identity number is required'],
   },
 });

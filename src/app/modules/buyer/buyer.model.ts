@@ -34,8 +34,7 @@ const UserSchema = new Schema<TBuyer>(
       enum: ['male', 'female'],
     },
     dateOfBirth: {
-      type: Date,
-      default: null
+      type: String,
     },
     contactNumber: {
       type: String,
