@@ -8,13 +8,15 @@ import AppError from '../../error/AppError';
 import httpStatus from 'http-status-codes';
 import { TSeller } from '../seller/seller.interface';
 import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
+import { generateUserId } from './user.utils';
 
 const createUserIntoDB = async (password: string, payload: TBuyer) => {
   // First create a user into db
   const userData: Partial<TUser> = {};
 
   // Set user id automatically
-  userData.id = '1245631';
+  const userId = await generateUserId();
+  userData.id = userId;
   // Set user name
   userData.userName = payload.userName;
   // Set user email
@@ -55,27 +57,34 @@ const createUserIntoDB = async (password: string, payload: TBuyer) => {
   }
 };
 
-const createSellerIntoDB = async(payload: TSeller) => {
+const createSellerIntoDB = async (payload: TSeller) => {
   console.log(payload);
-}
+};
 
+const uploadUserImageIntoDB = async (file: any, userId: string) => {
+  const user = await User.findOne({ id: userId }, { userName: 1, _id: 0 });
 
-const uploadUserImageIntoDB = async(file: any, userId: string) => {
-  const user = await User.findOne({id: userId}, {userName: 1, _id: 0});
-  
   const imageName = `${userId}-${user?.userName?.lastName}`;
   const imagePath = file?.path;
 
   const uploadImage = await sendImageToCloudinary(imagePath, imageName);
   const userImageURL = uploadImage?.secure_url;
-  
+
   // update image url in user or buyer collection
-  await User.findOneAndUpdate({id: userId}, {profileImage: userImageURL}, {new: true});
-  await Buyer.findOneAndUpdate({id: userId}, {profileImage: userImageURL}, {new: true}); 
-}
+  await User.findOneAndUpdate(
+    { id: userId },
+    { profileImage: userImageURL },
+    { new: true },
+  );
+  await Buyer.findOneAndUpdate(
+    { id: userId },
+    { profileImage: userImageURL },
+    { new: true },
+  );
+};
 
 export const UserServices = {
   createUserIntoDB,
   createSellerIntoDB,
-  uploadUserImageIntoDB
+  uploadUserImageIntoDB,
 };
