@@ -3,6 +3,7 @@ import { UserRoutes } from '../modules/users/user.router';
 import { AuthRoutes } from '../modules/auth/auth.router';
 import { SellerReqRoutes } from '../modules/sellerRequest/sellerRequest.router';
 import { BuyerRoutes } from '../modules/buyer/buyer.router';
+import { SellerRoutes } from '../modules/seller/seller.router';
 
 const router = Router();
 
@@ -18,6 +19,10 @@ const modulesRoute = [
   {
     path: '/buyer',
     routes: BuyerRoutes,
+  },
+  {
+    path: '/seller',
+    routes: SellerRoutes,
   },
   {
     path: '/request',

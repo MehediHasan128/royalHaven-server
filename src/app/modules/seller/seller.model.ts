@@ -44,7 +44,7 @@ const SellerSchema = new Schema<TSeller>({
   websiteLink: { type: String },
   licenceNumber: { type: String },
   identityNumber: {
-    type: IdentityNumberSchema,
+    type: String,
     required: [true, 'Identity number is required'],
   },
 });

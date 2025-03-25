@@ -21,5 +21,5 @@ export type TSeller = {
     companyName?: string;
     websiteLink?: string;
     licenceNumber?: string;
-    identityNumber: TIdentityNumber;
+    identityNumber: string;
 }

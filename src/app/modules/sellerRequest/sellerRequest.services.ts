@@ -8,7 +8,8 @@ const createSellerReqIntoDB = async(payload: TSeller) => {
 
 
 const getAllSellerRequestFromDB = async() => {
-    console.log(7);
+    const data = await SellerRequest.find().select('-_id');
+    return data;
 }
 
 

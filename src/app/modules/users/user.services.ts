@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { startSession } from 'mongoose';
+import { startSession, Types } from 'mongoose';
 import { TBuyer } from '../buyer/buyer.interface';
 import { Buyer } from '../buyer/buyer.model';
 import { TUser } from './user.interface';
@@ -8,14 +8,16 @@ import AppError from '../../error/AppError';
 import httpStatus from 'http-status-codes';
 import { TSeller } from '../seller/seller.interface';
 import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
-import { generateUserId } from './user.utils';
+import { generateBuyerId, generateSellerId } from './user.utils';
+import { Seller } from '../seller/seller.model';
+import { SellerRequest } from '../sellerRequest/sellerRequest.model';
 
 const createUserIntoDB = async (password: string, payload: TBuyer) => {
   // First create a user into db
   const userData: Partial<TUser> = {};
 
   // Set user id automatically
-  const userId = await generateUserId();
+  const userId = await generateBuyerId();
   userData.id = userId;
   // Set user name
   userData.userName = payload.userName;
@@ -58,7 +60,26 @@ const createUserIntoDB = async (password: string, payload: TBuyer) => {
 };
 
 const createSellerIntoDB = async (payload: TSeller) => {
-  console.log(payload);
+  const sellerId = await generateSellerId();
+  // Update user role and id
+  const user = await User.findOneAndUpdate(
+    { email: payload?.email },
+    { role: 'seller', id: sellerId },
+    { new: true },
+  );
+
+  // Seller seller id
+  payload.userId = user?._id as Types.ObjectId;
+  payload.id = user?.id;
+
+  // Add seller data in seller collection
+  const newSeller = await Seller.create(payload);
+
+  // delete buyer information to sellerReq and buyer collection
+  await SellerRequest.findOneAndDelete({ email: payload?.email });
+  await Buyer.findOneAndDelete({ email: payload?.email });
+
+  return newSeller;
 };
 
 const uploadUserImageIntoDB = async (file: any, userId: string) => {

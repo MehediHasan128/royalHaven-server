@@ -3,6 +3,7 @@ import { sendRes } from "../../utils/sendResponce";
 import { SellerReqServices } from "./sellerRequest.services";
 
 const createSeller = catchAsync(async(req, res) => {
+    console.log(req.body);
 
     const data = await SellerReqServices.createSellerReqIntoDB(req.body);
 
