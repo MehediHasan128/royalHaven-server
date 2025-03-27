@@ -1,11 +1,12 @@
-import { TSeller } from "./seller.interface"
+import { Seller } from "./seller.model";
 
-const createSellerIntoDB = async(payload: TSeller) => {
-    console.log(payload);
+const getSellerInformationFromDB = async (uid: string) => {
+    const data = await Seller.findOne({id: uid});
+    return data;
+};
+
+
+
+export const SellerServices = {
+    getSellerInformationFromDB
 }
-
-
-
-// export const SellerServices = {
-//     createSellerIntoDB
-// }

@@ -104,8 +104,14 @@ const uploadUserImageIntoDB = async (file: any, userId: string) => {
   );
 };
 
+const getAllUsersFromDB = async() => {
+  const data = await User.find({role: {$ne: 'admin'}}, {password: 0});
+  return data;
+}
+
 export const UserServices = {
   createUserIntoDB,
   createSellerIntoDB,
   uploadUserImageIntoDB,
+  getAllUsersFromDB
 };

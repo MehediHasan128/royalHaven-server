@@ -53,8 +53,25 @@ const uploadUserImage = catchAsync(async(req, res) => {
 })
 
 
+
+const getallUser = catchAsync(async(req, res) => {
+
+    const data = await UserServices.getAllUsersFromDB();
+
+    // Send responce
+    sendRes(res, {
+        success: true,
+        statusCode: 200,
+        message: 'Successfully retive all users!',
+        data: data
+    });
+
+})
+
+
 export const UserController = {
     createUser,
     createSeller,
-    uploadUserImage
+    uploadUserImage,
+    getallUser
 }
