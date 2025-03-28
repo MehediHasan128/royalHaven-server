@@ -109,9 +109,18 @@ const getAllUsersFromDB = async() => {
   return data;
 }
 
+
+const updateUserStatusIntoDB = async(userId: string, payload: {status: string}) => {
+  
+  const data = await User.findByIdAndUpdate(userId, payload, {new: true});
+  return data;
+
+}
+
 export const UserServices = {
   createUserIntoDB,
   createSellerIntoDB,
   uploadUserImageIntoDB,
-  getAllUsersFromDB
+  getAllUsersFromDB,
+  updateUserStatusIntoDB
 };

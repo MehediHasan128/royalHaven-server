@@ -12,5 +12,7 @@ router.post('/create-seller', UserController.createSeller);
 router.post('/uploadImage/:userId', upload.single('file'), UserController.uploadUserImage);
 // Get all users
 router.get('/', UserController.getallUser);
+// Update user status
+router.patch('/updateStatus/:userId', UserController.updateUserStatus);
 
 export const UserRoutes = router;

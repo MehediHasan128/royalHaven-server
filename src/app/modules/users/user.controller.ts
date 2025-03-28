@@ -20,7 +20,6 @@ const createUser = catchAsync(async(req, res) => {
 
 
 
-
 const createSeller = catchAsync(async(req, res) => {
     
 
@@ -69,9 +68,26 @@ const getallUser = catchAsync(async(req, res) => {
 })
 
 
+
+const updateUserStatus = catchAsync(async(req, res) => {
+
+    const data = await UserServices.updateUserStatusIntoDB(req.params.userId, req.body);
+
+    // Send responce
+    sendRes(res, {
+        success: true,
+        statusCode: 200,
+        message: 'Successfully user status!',
+        data: data
+    });
+
+})
+
+
 export const UserController = {
     createUser,
     createSeller,
     uploadUserImage,
-    getallUser
+    getallUser,
+    updateUserStatus
 }
